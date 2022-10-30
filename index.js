@@ -133,7 +133,6 @@ appContainer.addEventListener("click", function (event) {
         document
           .querySelector(".cl_btn")
           .addEventListener("click", function () {
-            console.log("закрыто");
             appContainer.classList.toggle("display_none");
             modalContainer.classList.toggle("display_none");
           });
@@ -149,15 +148,10 @@ window.onscroll = function () {
 //scroll animation to the top of the page
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-    const btnToTop = document.createElement("button");
-    btnToTop.classList.add("btn_to_top");
-    btnToTop.setAttribute("title", "Go to top");
-    btnToTop.innerHTML = "Top";
-    document.body.append(btnToTop);
-    btnToTop.addEventListener("click", topFunction);
-    btnToTop.style.cssText = `display:block;`;
+    document.querySelector('.btn_to_top').style.cssText =`display: block`;
+    document.querySelector('.btn_to_top').addEventListener("click", topFunction);
   } else {
-    btnToTop.style.cssText = `display:none;`;
+   document.querySelector('.btn_to_top').style.cssText =`display:none;` 
   }
 }
 
