@@ -1,7 +1,8 @@
 const url = "https://rickandmortyapi.com/api/character/";
 const appContainer = document.querySelector(".app_container");
 const modalContainer = document.querySelector(".modal_container");
-let page = 0;
+let page = null;
+
 
 //a function that will determine when it's time to send a new request.
 function checkPosition() {
@@ -44,7 +45,7 @@ function fetchCharacters() {
     .then((response) => response.json())
     .then((data) => {
       if (data.info.pages > page) {
-        fetch(`${url}?page${page}`)
+        fetch(`${url}?page=${page}`)
           .then((response) => response.json())
           .then((data) => {
             for (let i = 0; i < data.results.length; i++) {
