@@ -26,13 +26,30 @@ body {
   height: auto;
 }
 
+.pl {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 5px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.pl li:hover {
+  color: rgb(26, 24, 24);
+  font-weight: bold;
+}
+
 .modal_container {
   position: relative;
   background-color: rgb(49, 49, 49);
   max-width: 60vw;
   margin: 0 auto;
   min-height: 50vh;
-  margin-top: 25vh;
+  margin-top: 10vh;
   padding: 10px;
 }
 .modal_container .cl_btn {
@@ -154,6 +171,11 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+.act {
+  color: rgb(95, 12, 251);
+  font-weight: bolder;
 }
 
 @media screen and (max-width: 680px) {
