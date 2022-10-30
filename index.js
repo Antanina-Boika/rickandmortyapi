@@ -3,7 +3,7 @@ const appContainer = document.querySelector(".app_container");
 const modalContainer = document.querySelector(".modal_container");
 let page = 0;
 
-//функция, которая будет определять, когда пора отправлять новый запрос.
+//a function that will determine when it's time to send a new request.
 function checkPosition() {
   const height = document.body.offsetHeight;
   const screenHeight = window.innerHeight;
@@ -16,8 +16,7 @@ function checkPosition() {
   }
 }
 
-//функция, притармаживающая обработку прокрутки,
-//чтобы меньше нагружаьб браузер.
+//a function that slows down scrolling processing in order to reduce the load on the browser.
 function throttle(callee, timeout) {
   let timer = null;
 
@@ -38,18 +37,16 @@ function throttle(callee, timeout) {
   window.addEventListener("resize", throttle(checkPosition, 250));
 })();
 
-//функцию для запросов к серверу:
+//function for requests to the server
 function fetchCharacters() {
   page += 1;
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (data.info.pages > page) {
-        fetch(url + "?page=" + page)
+        fetch(`${url}?page${page}`)
           .then((response) => response.json())
           .then((data) => {
-            console.log(data.results.length);
             for (let i = 0; i < data.results.length; i++) {
               makeGallery(data.results[i]);
             }
@@ -62,9 +59,8 @@ function fetchCharacters() {
     .catch((error) => console.error(error));
 }
 
-//функция рендеринга информации с сервера
+//function of rendering information from the server
 function makeGallery(info) {
-  console.log(info);
   let characterContainer = document.createElement("div");
   characterContainer.classList.add("character_container");
   characterContainer.setAttribute("id", info.id);
@@ -97,7 +93,6 @@ appContainer.addEventListener("click", function (event) {
     ) {
       id = event.target.parentNode.getAttribute("id");
     }
-    console.log(id);
     fetch(url + id)
       .then((response) => response.json())
       .then((data) => {
@@ -105,7 +100,7 @@ appContainer.addEventListener("click", function (event) {
         modalContainer.classList.toggle("display_none");
         modalContainer.innerHTML = `
         <div class="modal_character"> 
-          <div class="cl_btn_7"></div>       
+          <div class="cl_btn"></div>       
           <img class="character_full_img"/>
           <div class="character_info">
             <div>      
@@ -136,7 +131,7 @@ appContainer.addEventListener("click", function (event) {
           data.episode[0].split("episode/")[1];
         document.querySelector(".character_gender").innerHTML = data.gender;
         document
-          .querySelector(".cl_btn_7")
+          .querySelector(".cl_btn")
           .addEventListener("click", function () {
             console.log("закрыто");
             appContainer.classList.toggle("display_none");
@@ -151,7 +146,7 @@ window.onscroll = function () {
   scrollFunction();
 };
 
-//реализация анимации прокрутки к началу страницы
+//scroll animation to the top of the page
 function scrollFunction() {
   if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
     const btnToTop = document.createElement("button");
@@ -160,9 +155,9 @@ function scrollFunction() {
     btnToTop.innerHTML = "Top";
     document.body.append(btnToTop);
     btnToTop.addEventListener("click", topFunction);
-    btnToTop.style.cssText = ` display:block;`;
+    btnToTop.style.cssText = `display:block;`;
   } else {
-    btnToTop.style.cssText = ` display:none;`;
+    btnToTop.style.cssText = `display:none;`;
   }
 }
 
